@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The New College | MCQ Assessment Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --maroon: #7a0b0b;
+            --maroon-dark: #5b0707;
+            --maroon-light: #9b1515;
+            --gold: #d7b15c;
+            --gold-light: #f0d08a;
+            --cream: #fff7e6;
+            --ink: #101828;
+            --muted: #667085;
+            --surface: #ffffff;
+            --bg: #f9f4ec;
+            --border: rgba(122, 11, 11, .12);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --shadow-sm: 0 2px 8px rgba(16, 24, 40, .07);
+            --shadow-md: 0 8px 30px rgba(16, 24, 40, .10);
+            --shadow-lg: 0 20px 60px rgba(16, 24, 40, .13);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--maroon);
+            border-radius: 99px;
+        }
+
+        /* ── Utilities ── */
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        /* ────────────────────────────────────────
+       NAVBAR
+    ──────────────────────────────────────── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(91, 7, 7, .97);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(215, 177, 92, .5);
+            padding: .9rem 0;
+            transition: all .3s;
+        }
+
+        .navbar.scrolled {
+            padding: .6rem 0;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .25);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: rgba(215, 177, 92, .15);
+            border: 1px solid rgba(215, 177, 92, .35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        .brand-text-title {
+            font-family: "Playfair Display", serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: .3px;
+        }
+
+        .brand-text-sub {
+            font-size: .72rem;
+            color: rgba(255, 255, 255, .6);
+            margin-top: .1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, .78);
+            font-size: .88rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, var(--gold) 0%, #c9952d 100%);
+            color: var(--maroon-dark) !important;
+            font-weight: 700 !important;
+            padding: .5rem 1.3rem;
+            border-radius: var(--radius-sm);
+            transition: opacity .2s, transform .2s !important;
+        }
+
+        .btn-nav:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* ────────────────────────────────────────
+       HERO
+    ──────────────────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 50%, #9b1515 100%);
+            padding-top: 80px;
+        }
+
+        /* animated bg grid */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(215, 177, 92, .07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215, 177, 92, .07) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridDrift 25s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(60px, 60px);
+            }
+        }
+
+        /* radial glow blobs */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero-blob-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(215, 177, 92, .18) 0%, transparent 70%);
+            top: -150px;
+            left: -100px;
+            animation: blobFloat 10s ease-in-out infinite alternate;
+        }
+
+        .hero-blob-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, .08) 0%, transparent 70%);
+            bottom: -100px;
+            right: -80px;
+            animation: blobFloat 14s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes blobFloat {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(30px, -30px) scale(1.08);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 4rem 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem .9rem;
+            background: rgba(215, 177, 92, .12);
+            border: 1px solid rgba(215, 177, 92, .3);
+            border-radius: 99px;
+            font-size: .8rem;
+            color: var(--gold-light);
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            margin-bottom: 1.6rem;
+            animation: fadeSlideUp .7s .1s both;
+        }
+
+        .hero-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 0 4px rgba(215, 177, 92, .25);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 4px rgba(215, 177, 92, .25);
+            }
+
+            50% {
+                box-shadow: 0 0 0 7px rgba(215, 177, 92, .10);
+            }
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.15;
+            color: #fff;
+            margin-bottom: 1.3rem;
+            animation: fadeSlideUp .7s .2s both;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, .72);
+            max-width: 580px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            animation: fadeSlideUp .7s .3s both;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeSlideUp .7s .4s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .85rem 2rem;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--gold) 0%, #c9952d 100%);
+            color: var(--maroon-dark);
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 4px 18px rgba(215, 177, 92, .4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(215, 177, 92, .5);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .85rem 2rem;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, .3);
+            color: rgba(255, 255, 255, .88);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            background: rgba(215, 177, 92, .08);
+        }
+
+        /* Floating stat pills below hero text */
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+            animation: fadeSlideUp .7s .55s both;
+        }
+
+        .stat-pill {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .55rem 1.1rem;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 99px;
+            color: rgba(255, 255, 255, .85);
+            font-size: .88rem;
+        }
+
+        .stat-pill i {
+            color: var(--gold);
+            font-size: .8rem;
+        }
+
+        /* Scroll indicator */
+        .scroll-cue {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            color: rgba(255, 255, 255, .4);
+            font-size: .78rem;
+            animation: fadeSlideUp .7s .8s both;
+        }
+
+        .scroll-cue i {
+            animation: bounce 1.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(5px)
+            }
+        }
+
+        /* ────────────────────────────────────────
+       SHARED SECTION STYLES
+    ──────────────────────────────────────── */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .3rem .8rem;
+            background: rgba(122, 11, 11, .07);
+            border: 1px solid rgba(122, 11, 11, .14);
+            border-radius: 99px;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--maroon);
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--maroon-dark);
+            line-height: 1.2;
+            margin-bottom: .9rem;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        .section-sub.centered {
+            margin: 0 auto;
+        }
+
+        /* Reveal animation (JS toggled) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ────────────────────────────────────────
+       FEATURES SECTION
+    ──────────────────────────────────────── */
+        #features {
+            background: var(--bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: transform .25s, box-shadow .25s, border-color .25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--maroon), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(122, 11, 11, .2);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, rgba(122, 11, 11, .08) 0%, rgba(215, 177, 92, .15) 100%);
+            border: 1px solid rgba(122, 11, 11, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--maroon);
+            margin-bottom: 1.3rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            color: var(--ink);
+        }
+
+        .feature-card p {
+            font-size: .93rem;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* ────────────────────────────────────────
+       STATS SECTION
+    ──────────────────────────────────────── */
+        #stats {
+            background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #stats::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(215, 177, 92, .06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215, 177, 92, .06) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .stats-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: "Playfair Display", serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: .9rem;
+            color: rgba(255, 255, 255, .65);
+            margin-top: .5rem;
+        }
+
+        .stat-divider {
+            width: 40px;
+            height: 2px;
+            background: rgba(215, 177, 92, .35);
+            margin: .7rem auto 0;
+        }
+
+        /* ────────────────────────────────────────
+       HOW IT WORKS
+    ──────────────────────────────────────── */
+        #how {
+            background: var(--cream);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3.5rem;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: "";
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg,
+                    rgba(122, 11, 11, .2) 0 12px, transparent 12px 24px);
+        }
+
+        .step-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: box-shadow .25s, transform .25s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-num {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--maroon), var(--maroon-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Playfair Display", serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 4px 14px rgba(122, 11, 11, .3);
+        }
+
+        .step-icon {
+            font-size: 1.4rem;
+            color: var(--maroon);
+            margin-bottom: .8rem;
+            display: block;
+        }
+
+        .step-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: .45rem;
+        }
+
+        .step-card p {
+            font-size: .88rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ────────────────────────────────────────
+       ABOUT SECTION
+    ──────────────────────────────────────── */
+        #about {
+            background: var(--bg);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .about-left .section-label {
+            margin-bottom: 1rem;
+        }
+
+        .about-left .section-title {
+            text-align: left;
+        }
+
+        .about-left .about-body {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: .9rem;
+            margin-bottom: 2rem;
+        }
+
+        .pillar {
+            display: flex;
+            align-items: flex-start;
+            gap: .9rem;
+        }
+
+        .pillar-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: var(--radius-sm);
+            background: rgba(122, 11, 11, .07);
+            border: 1px solid rgba(122, 11, 11, .12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--maroon);
+            font-size: .95rem;
+        }
+
+        .pillar-text h4 {
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: .2rem;
+        }
+
+        .pillar-text p {
+            font-size: .86rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* Right side – decorative card cluster */
+        .about-right {
+            position: relative;
+            min-height: 420px;
+        }
+
+        .about-card-main {
+            background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card-main::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(215, 177, 92, .07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215, 177, 92, .07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .about-card-main-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-card-main h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: .7rem;
+            color: #fff;
+        }
+
+        .about-card-main p {
+            font-size: .9rem;
+            color: rgba(255, 255, 255, .72);
+            line-height: 1.7;
+        }
+
+        .about-card-main-seal {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(215, 177, 92, .15);
+            border: 2px solid rgba(215, 177, 92, .35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 1.3rem;
+        }
+
+        .about-float-card {
+            position: absolute;
+            right: -1.5rem;
+            bottom: -1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.2rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            min-width: 210px;
+        }
+
+        .about-float-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, rgba(122, 11, 11, .08), rgba(215, 177, 92, .15));
+            border: 1px solid rgba(122, 11, 11, .14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--maroon);
+            font-size: 1.1rem;
+        }
+
+        .about-float-label {
+            font-size: .78rem;
+            color: var(--muted);
+        }
+
+        .about-float-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* ────────────────────────────────────────
+       TESTIMONIALS / TRUST
+    ──────────────────────────────────────── */
+        #trust {
+            background: var(--cream);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .trust-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .trust-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .trust-stars {
+            color: var(--gold);
+            font-size: .85rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .trust-quote {
+            font-size: .93rem;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 1.3rem;
+        }
+
+        .trust-author {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .trust-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--maroon), var(--maroon-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .75rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .trust-name {
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .trust-role {
+            font-size: .78rem;
+            color: var(--muted);
+        }
+
+        /* ────────────────────────────────────────
+       FAQ
+    ──────────────────────────────────────── */
+        #faq {
+            background: var(--bg);
+        }
+
+        .faq-list {
+            max-width: 760px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            margin-bottom: .75rem;
+            overflow: hidden;
+            transition: box-shadow .2s;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.15rem 1.4rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: .96rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-align: left;
+            gap: 1rem;
+        }
+
+        .faq-question i {
+            flex-shrink: 0;
+            color: var(--maroon);
+            transition: transform .3s;
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s ease;
+            padding: 0 1.4rem;
+            font-size: .9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 1.3rem;
+        }
+
+        /* ────────────────────────────────────────
+       CTA BANNER
+    ──────────────────────────────────────── */
+        #cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 60%, #9b1515 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cta::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(215, 177, 92, .06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(215, 177, 92, .06) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-inner h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #fff;
+            margin-bottom: .9rem;
+        }
+
+        .cta-inner p {
+            color: rgba(255, 255, 255, .72);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* ────────────────────────────────────────
+       FOOTER
+    ──────────────────────────────────────── */
+        footer {
+            background: var(--maroon-dark);
+            border-top: 2px solid rgba(215, 177, 92, .25);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .footer-brand .nc-brand-title {
+            font-family: "Playfair Display", serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: .3rem;
+        }
+
+        .footer-brand p {
+            font-size: .86rem;
+            color: rgba(255, 255, 255, .5);
+            line-height: 1.65;
+            margin-top: .6rem;
+        }
+
+        .footer-heading {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: .6px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: .55rem;
+        }
+
+        .footer-links a {
+            font-size: .88rem;
+            color: rgba(255, 255, 255, .55);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-size: .82rem;
+            color: rgba(255, 255, 255, .35);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: .7rem;
+        }
+
+        .footer-socials a {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, .5);
+            font-size: .8rem;
+            transition: background .2s, color .2s;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            background: rgba(215, 177, 92, .2);
+            color: var(--gold);
+        }
+
+        /* ────────────────────────────────────────
+       BACK-TO-TOP BUTTON
+    ──────────────────────────────────────── */
+        #back-top {
+            position: fixed;
+            bottom: 1.8rem;
+            right: 1.8rem;
+            z-index: 99;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--maroon);
+            border: 1.5px solid rgba(215, 177, 92, .35);
+            color: var(--gold);
+            font-size: .9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .3s, transform .3s, background .2s;
+            box-shadow: 0 4px 14px rgba(122, 11, 11, .4);
+        }
+
+        #back-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #back-top:hover {
+            background: var(--maroon-light);
+        }
+
+        /* ────────────────────────────────────────
+       SHARED ANIMATION
+    ──────────────────────────────────────── */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ────────────────────────────────────────
+       RESPONSIVE
+    ──────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--maroon-dark);
+                padding: 1rem 1.5rem;
+                gap: 1rem;
+                border-bottom: 2px solid rgba(215, 177, 92, .3);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-right {
+                min-height: 320px;
+            }
+
+            .about-float-card {
+                right: 0;
+                bottom: -1rem;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .steps-grid::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Back to top -->
+    <button id="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="/" class="brand">
+                <img src="{{ url_for('static', filename='image.png') }}" alt="Logo" class="brand-logo" style="background: transparent; border: none; object-fit: contain;">
+                <div>
+                    <div class="brand-text-title">The New College</div>
+                    <div class="brand-text-sub">Assessment Portal</div>
+                </div>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/#features">Features</a></li>
+                <li><a href="/#how">How It Works</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#faq">FAQ</a></li>
+                <li><a href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <li><a href="/login" class="btn-nav"><i class="fa-solid fa-play"></i> Start Assessment</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── Hero ── -->
+    <section class="hero" id="hero">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="container hero-content text-center">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Secure Assessment Platform &mdash; 2026
+            </div>
+            <h1>Where Academic<br /><span>Integrity Meets</span><br />Smart Evaluation</h1>
+            <p class="hero-desc">
+                The New College's state-of-the-art MCQ portal delivers real-time evaluation,
+                advanced anti-cheat monitoring, and a seamless experience across every device.
+            </p>
+            <div class="hero-cta-row">
+                <a href="/login" class="btn-primary">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login to Assessment
+                </a>
+                <a href="/#how" class="btn-outline">
+                    <i class="fa-regular fa-circle-play"></i> How It Works
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-pill"><i class="fa-solid fa-circle-check"></i> Instant Results</div>
+                <div class="stat-pill"><i class="fa-solid fa-shield-halved"></i> Anti-Cheat Enabled</div>
+                <div class="stat-pill"><i class="fa-solid fa-mobile-screen"></i> All Devices</div>
+                <div class="stat-pill"><i class="fa-solid fa-lock"></i> Secure Platform</div>
+            </div>
+        </div>
+        <div class="scroll-cue">
+            <span>Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ── Features ── -->
+    <section id="features">
+        <div class="container">
+            <div class="text-center reveal">
+                <div class="section-label"><i class="fa-solid fa-stars"></i> Portal Features</div>
+                <h2 class="section-title">Everything You Need for Fair Assessment</h2>
+                <p class="section-sub centered">
+                    Built from the ground up to ensure every student is evaluated on a level playing field,
+                    with technology that works for both students and faculty.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Real-Time Evaluation</h3>
+                    <p>Get your score the moment you submit. Our engine processes answers instantly with no queue or
+                        waiting period.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Anti-Cheat Mechanics</h3>
+                    <p>Intelligent tab-switch detection monitors window focus throughout the test. Three violations
+                        automatically terminate the session.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Pixel-perfect on every screen — desktop, laptop, tablet, or smartphone. No native app download
+                        required.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h3>Smart Timer</h3>
+                    <p>Visible countdown with alerts at 10 and 5-minute marks. Auto-submits gracefully when time
+                        expires.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                    <h3>Detailed Analytics</h3>
+                    <p>Faculty dashboards show class performance, question-level difficulty, and individual student
+                        reports.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fa-solid fa-file-certificate"></i></div>
+                    <h3>Instant Certificates</h3>
+                    <p>Downloadable PDF score certificates generated on-the-fly for record keeping and personal
+                        archives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Stats ── -->
+    <section id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-count="12000">0</span>
+                    <div class="stat-divider"></div>
+                    <div class="stat-label">Students Assessed</div>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-count="98">0</span>
+                    <div class="stat-divider"></div>
+                    <div class="stat-label">Accuracy Rate %</div>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-count="350">0</span>
+                    <div class="stat-divider"></div>
+                    <div class="stat-label">Question Banks</div>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-count="24">0</span>
+                    <div class="stat-divider"></div>
+                    <div class="stat-label">Departments Covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── How It Works ── -->
+    <section id="how">
+        <div class="container">
+            <div class="text-center reveal">
+                <div class="section-label"><i class="fa-regular fa-compass"></i> Process</div>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-sub centered">
+                    Getting started takes less than five minutes. Follow these simple steps to complete your assessment.
+                </p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-num">01</div>
+                    <i class="fa-solid fa-right-to-bracket step-icon"></i>
+                    <h3>Login</h3>
+                    <p>Sign in using your Register Number and Date of Birth from the official CIA Data list.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">02</div>
+                    <i class="fa-solid fa-list-check step-icon"></i>
+                    <h3>Select Exam</h3>
+                    <p>Choose your semester, subject from Semester.csv, and CIA 1 or CIA 2.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">03</div>
+                    <i class="fa-solid fa-pen-nib step-icon"></i>
+                    <h3>Attempt</h3>
+                    <p>Answer MCQs in a secure, full-focus environment. The portal monitors for violations
+                        automatically.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-num">04</div>
+                    <i class="fa-solid fa-trophy step-icon"></i>
+                    <h3>Get Results</h3>
+                    <p>Receive your score instantly with a detailed breakdown and a downloadable certificate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── About ── -->
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <!-- Left -->
+                <div class="about-left reveal">
+                    <div class="section-label"><i class="fa-solid fa-building-columns"></i> About The Portal</div>
+                    <h2 class="section-title">Built for The New College's Legacy of Excellence</h2>
+                    <p class="about-body">
+                        The New College, Chennai, has stood as a beacon of higher education since 1951.
+                        This portal is an extension of that legacy — a digital infrastructure that upholds
+                        the same standards of fairness, rigour, and transparency that have defined generations
+                        of scholars from these halls.
+                    </p>
+                    <p class="about-body">
+                        Designed exclusively for internal assessments, the platform serves undergraduate and
+                        postgraduate students across all departments, giving faculty precise tools to gauge
+                        learning outcomes with confidence.
+                    </p>
+
+                    <div class="about-pillars">
+                        <div class="pillar">
+                            <div class="pillar-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <div class="pillar-text">
+                                <h4>Fairness First</h4>
+                                <p>Every student receives a unique question order, reducing the chance of collaboration
+                                    during the exam.</p>
+                            </div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-icon"><i class="fa-solid fa-database"></i></div>
+                            <div class="pillar-text">
+                                <h4>Secure Data Handling</h4>
+                                <p>All student data and responses are encrypted at rest and in transit following best
+                                    practices.</p>
+                            </div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-icon"><i class="fa-solid fa-users-gear"></i></div>
+                            <div class="pillar-text">
+                                <h4>Faculty Control</h4>
+                                <p>Department heads can create, schedule, and review assessments with granular
+                                    permission controls.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/#about" class="btn-primary" style="display: inline-flex;">
+                        <i class="fa-solid fa-arrow-right"></i> Learn More About Us
+                    </a>
+                </div>
+
+                <!-- Right -->
+                <div class="about-right reveal">
+                    <div class="about-card-main">
+                        <div class="about-card-main-inner">
+                            <div class="about-card-main-seal" style="background: transparent;">
+                                <img src="{{ url_for('static', filename='image.png') }}" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                            </div>
+                            <h3>The New College</h3>
+                            <p>
+                                Affiliated with the University of Madras, The New College is one of Tamil Nadu's
+                                premier institutions, recognised for its academic excellence, diverse community,
+                                and commitment to holistic student development since 1951.
+                            </p>
+                            <div style="margin-top: 1.5rem; display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                                <div>
+                                    <div
+                                        style="font-size: 1.5rem; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif;">
+                                        70+</div>
+                                    <div style="font-size: .78rem; color: rgba(255,255,255,.55);">Years of Excellence
+                                    </div>
+                                </div>
+                                <div style="width: 1px; background: rgba(255,255,255,.1);"></div>
+                                <div>
+                                    <div
+                                        style="font-size: 1.5rem; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif;">
+                                        40+</div>
+                                    <div style="font-size: .78rem; color: rgba(255,255,255,.55);">Academic Programmes
+                                    </div>
+                                </div>
+                                <div style="width: 1px; background: rgba(255,255,255,.1);"></div>
+                                <div>
+                                    <div
+                                        style="font-size: 1.5rem; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif;">
+                                        5000+</div>
+                                    <div style="font-size: .78rem; color: rgba(255,255,255,.55);">Active Students</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-float-card">
+                        <div class="about-float-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <div>
+                            <div class="about-float-label">Portal Status</div>
+                            <div class="about-float-value" style="color: var(--maroon);">
+                                <i class="fa-solid fa-circle"
+                                    style="color: #22c55e; font-size: .55rem; vertical-align: middle;"></i>
+                                Active & Monitored
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Testimonials ── -->
+    <section id="trust">
+        <div class="container">
+            <div class="text-center reveal">
+                <div class="section-label"><i class="fa-solid fa-quote-left"></i> Testimonials</div>
+                <h2 class="section-title">Trusted by Students & Faculty</h2>
+                <p class="section-sub centered">Hear what members of our academic community say about the portal.</p>
+            </div>
+
+            <div class="trust-grid">
+                <div class="trust-card reveal">
+                    <div class="trust-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i></div>
+                    <p class="trust-quote">"The real-time results feature is fantastic. I knew my score the moment I hit
+                        submit — no more waiting anxiously for days."</p>
+                    <div class="trust-author">
+                        <div class="trust-avatar">AM</div>
+                        <div>
+                            <div class="trust-name">Ayesha Mohammed</div>
+                            <div class="trust-role">III B.Sc Mathematics</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trust-card reveal">
+                    <div class="trust-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i></div>
+                    <p class="trust-quote">"As a faculty coordinator, the analytics dashboard saves me hours. I can
+                        instantly see which topics students are struggling with."</p>
+                    <div class="trust-author">
+                        <div class="trust-avatar">DR</div>
+                        <div>
+                            <div class="trust-name">Dr. Rizwan Ahmed</div>
+                            <div class="trust-role">Dept. of Commerce</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trust-card reveal">
+                    <div class="trust-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-regular fa-star"></i></div>
+                    <p class="trust-quote">"I took the exam on my phone during commute. The mobile experience was
+                        seamless — zero layout issues, no glitches at all."</p>
+                    <div class="trust-author">
+                        <div class="trust-avatar">SK</div>
+                        <div>
+                            <div class="trust-name">Salman Khan</div>
+                            <div class="trust-role">II B.A English Literature</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section id="faq">
+        <div class="container">
+            <div class="text-center reveal">
+                <div class="section-label"><i class="fa-regular fa-circle-question"></i> FAQ</div>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-sub centered">Everything you need to know before your first assessment.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        Who can access the assessment portal?
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Only students listed in the official CIA Data CSV can log in. You will need your register number and date of birth exactly as recorded in that file.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        What happens if I accidentally switch tabs during an exam?
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        The system detects focus loss events. A warning is displayed after each incident. After three
+                        warnings, your session is automatically terminated and your current progress is submitted as
+                        your final answer.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        Can I take the exam on a mobile device?
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes. The portal is fully responsive and has been tested on iOS and Android browsers. We
+                        recommend using Chrome or Safari for the best experience.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        How quickly will I receive my results?
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Results are generated instantly upon submission. Your score, performance breakdown, and
+                        downloadable certificate are available on your dashboard within seconds.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question">
+                        Is my data secure on this platform?
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Absolutely. All data is encrypted in transit (TLS 1.3) and at rest. No personal information is
+                        shared with third parties. The portal complies with UGC data privacy guidelines.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section id="cta">
+        <div class="container cta-inner text-center">
+            <div class="section-label"
+                style="background: rgba(215,177,92,.12); border-color: rgba(215,177,92,.3); color: var(--gold-light); display: inline-flex; margin-bottom: 1.2rem;">
+                <i class="fa-solid fa-graduation-cap"></i> Ready to Begin?
+            </div>
+            <h2 class="reveal">Start Your Assessment Journey Today</h2>
+            <p class="reveal">Login with your register number and date of birth. No registration required.</p>
+            <div class="hero-cta-row reveal">
+                <a href="/login" class="btn-primary">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login Now
+                </a>
+                <a href="/#faq" class="btn-outline">
+                    <i class="fa-solid fa-headset"></i> FAQ & Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div class="nc-brand-title">The New College</div>
+                    <p>Internal Assessment Portal for enrolled students and faculty of The New College, Chennai —
+                        affiliated with the University of Madras.</p>
+                </div>
+
+                <div>
+                    <div class="footer-heading">Quick Links</div>
+                    <ul class="footer-links">
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#how">How It Works</a></li>
+                        <li><a href="/#about">About</a></li>
+                        <li><a href="/#faq">FAQ</a></li>
+                        <li><a href="/login">Login</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-heading">Support</div>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fa-solid fa-envelope fa-fw"></i> portal@newcollege.ac.in</a></li>
+                        <li><a href="#"><i class="fa-solid fa-phone fa-fw"></i> +91 44 2812 3456</a></li>
+                        <li><a href="#"><i class="fa-solid fa-location-dot fa-fw"></i> Royapettah, Chennai</a></li>
+                        <li style="margin-top:.8rem;"><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 The New College, Chennai. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ── Scripts ── -->
+    <script>
+        /* ── Navbar scroll effect ── */
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            document.getElementById('back-top').classList.toggle('show', window.scrollY > 300);
+        });
+
+        /* ── Back to top ── */
+        document.getElementById('back-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ── Hamburger menu ── */
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        /* ── Scroll reveal ── */
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    // stagger siblings
+                    const siblings = e.target.parentElement.querySelectorAll('.reveal');
+                    let delay = 0;
+                    siblings.forEach((sib, idx) => { if (sib === e.target) delay = idx * 100; });
+                    e.target.style.transitionDelay = delay + 'ms';
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => io.observe(el));
+
+        /* ── Counter animation ── */
+        const counters = document.querySelectorAll('[data-count]');
+        const counterIO = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                const target = parseInt(el.dataset.count);
+                const suffix = el.dataset.suffix || (target > 100 ? '+' : '%');
+                const duration = 1600;
+                const step = target / (duration / 16);
+                let current = 0;
+                const tick = () => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.floor(current).toLocaleString() + (current >= target ? (target === 98 ? '%' : '+') : '');
+                    if (current < target) requestAnimationFrame(tick);
+                };
+                tick();
+                counterIO.unobserve(el);
+            });
+        }, { threshold: 0.4 });
+        counters.forEach(el => counterIO.observe(el));
+
+        /* ── FAQ accordion ── */
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+
+</html>
